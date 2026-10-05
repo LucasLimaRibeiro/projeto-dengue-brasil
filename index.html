@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dengue Brasil | Análise de Dados</title>
+
+
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f5f7fa;
+        color: #263238;
+    }
+
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+        min-height: 600px;
+        background: linear-gradient(135deg, #082032, #0f4c5c, #1b6f7a);
+        color: white;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+
+    .hero::after {
+        content: "";
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        border: 80px solid rgba(255,255,255,0.05);
+        right: -150px;
+        top: -120px;
+    }
+
+
+    .hero-content {
+        width: 1100px;
+        max-width: 90%;
+        margin: auto;
+        position: relative;
+        z-index: 2;
+    }
+
+
+    .tag {
+        display: inline-block;
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.2);
+        padding: 8px 16px;
+        border-radius: 30px;
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+
+
+    .hero h1 {
+        font-size: 58px;
+        max-width: 750px;
+        line-height: 1.05;
+        margin-bottom: 25px;
+    }
+
+
+    .hero h1 span {
+        color: #7de2d1;
+    }
+
+
+    .hero p {
+        max-width: 650px;
+        font-size: 19px;
+        line-height: 1.7;
+        color: #dceef0;
+    }
+
+
+    .hero-button {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 14px 25px;
+        background: #7de2d1;
+        color: #082032;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+
+    .hero-button:hover {
+        transform: translateY(-3px);
+        background: white;
+    }
+
+
+    /* =========================
+       CONTAINER
+    ========================= */
+
+    .container {
+        width: 1100px;
+        max-width: 90%;
+        margin: auto;
+    }
+
+
+    /* =========================
+       KPIs
+    ========================= */
+
+    .kpis {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-top: -55px;
+        position: relative;
+        z-index: 5;
+    }
+
+
+    .kpi {
+        background: white;
+        padding: 30px;
+        border-radius: 14px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+
+    .kpi small {
+        color: #607d8b;
+        font-size: 14px;
+    }
+
+
+    .kpi strong {
+        display: block;
+        font-size: 34px;
+        margin-top: 8px;
+        color: #0f4c5c;
+    }
+
+
+    /* =========================
+       SEÇÕES
+    ========================= */
+
+    section {
+        padding: 80px 0;
+    }
+
+
+    .section-title {
+        margin-bottom: 40px;
+    }
+
+
+    .section-title small {
+        color: #168aad;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+
+    .section-title h2 {
+        font-size: 36px;
+        margin-top: 8px;
+        color: #082032;
+    }
+
+
+    .section-title p {
+        max-width: 700px;
+        color: #607d8b;
+        margin-top: 15px;
+        line-height: 1.7;
+    }
+
+
+    /* =========================
+       PROBLEMA
+    ========================= */
+
+    .problem {
+        background: white;
+    }
+
+
+    .problem-box {
+        border-left: 5px solid #168aad;
+        padding: 25px 30px;
+        background: #f1f8fa;
+        font-size: 21px;
+        line-height: 1.6;
+        border-radius: 0 10px 10px 0;
+    }
+
+
+    /* =========================
+       ANÁLISES
+    ========================= */
+
+    .analysis-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+
+    .analysis-card {
+        background: white;
+        padding: 30px;
+        border-radius: 14px;
+        border: 1px solid #e4e9ec;
+        transition: 0.3s;
+    }
+
+
+    .analysis-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+
+
+    .icon {
+        font-size: 30px;
+        margin-bottom: 15px;
+    }
+
+
+    .analysis-card h3 {
+        color: #0f4c5c;
+        margin-bottom: 10px;
+    }
+
+
+    .analysis-card p {
+        color: #607d8b;
+        line-height: 1.6;
+    }
+
+
+    /* =========================
+       METODOLOGIA
+    ========================= */
+
+    .methodology {
+        background: #082032;
+        color: white;
+    }
+
+
+    .methodology .section-title h2 {
+        color: white;
+    }
+
+
+    .methodology .section-title p {
+        color: #c7dce0;
+    }
+
+
+    .steps {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+
+
+    .step {
+        padding: 25px;
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 12px;
+        background: rgba(255,255,255,0.04);
+    }
+
+
+    .step-number {
+        color: #7de2d1;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 12px;
+    }
+
+
+    .step h3 {
+        margin-bottom: 10px;
+    }
+
+
+    .step p {
+        color: #bfd3d7;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+
+    /* =========================
+       INSIGHTS
+    ========================= */
+
+    .insights {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        align-items: center;
+    }
+
+
+    .insight-text p {
+        color: #607d8b;
+        line-height: 1.8;
+        margin-bottom: 15px;
+    }
+
+
+    .highlight {
+        background: #e9f7f5;
+        padding: 30px;
+        border-radius: 14px;
+        border: 1px solid #cdece7;
+    }
+
+
+    .highlight h3 {
+        color: #0f4c5c;
+        margin-bottom: 15px;
+    }
+
+
+    .highlight ul {
+        padding-left: 20px;
+    }
+
+
+    .highlight li {
+        margin-bottom: 10px;
+    }
+
+
+    /* =========================
+       TECNOLOGIAS
+    ========================= */
+
+    .tech-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+
+    .tech {
+        background: #082032;
+        color: white;
+        padding: 12px 18px;
+        border-radius: 30px;
+    }
+
+
+    /* =========================
+       MATERIAIS / DASHBOARD
+    ========================= */
+
+    .dashboard {
+        background: linear-gradient(135deg, #168aad, #0f4c5c);
+        color: white;
+        text-align: center;
+    }
+
+
+    .dashboard h2 {
+        font-size: 38px;
+        margin-bottom: 15px;
+    }
+
+
+    .dashboard p {
+        max-width: 700px;
+        margin: auto;
+        color: #e0f1f3;
+        line-height: 1.7;
+    }
+
+
+    .project-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 35px;
+    }
+
+
+    .project-button {
+        display: inline-block;
+        padding: 15px 22px;
+        border: 1px solid rgba(255,255,255,0.35);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: 0.3s;
+        background: rgba(255,255,255,0.08);
+    }
+
+
+    .project-button:hover {
+        transform: translateY(-3px);
+        background: white;
+        color: #0f4c5c;
+    }
+
+
+    .project-button.primary {
+        background: white;
+        color: #0f4c5c;
+    }
+
+
+    .project-button.primary:hover {
+        background: #7de2d1;
+        color: #082032;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+        background: #06151f;
+        color: #9db4ba;
+        text-align: center;
+        padding: 30px;
+        font-size: 14px;
+    }
+
+
+    /* =========================
+       RESPONSIVO
+    ========================= */
+
+    @media (max-width: 800px) {
+
+        .hero {
+            min-height: 520px;
+        }
+
+
+        .hero h1 {
+            font-size: 40px;
+        }
+
+
+        .kpis {
+            grid-template-columns: 1fr;
+            margin-top: 25px;
+        }
+
+
+        .analysis-grid,
+        .insights {
+            grid-template-columns: 1fr;
+        }
+
+
+        .steps {
+            grid-template-columns: 1fr 1fr;
+        }
+
+    }
+
+
+    @media (max-width: 500px) {
+
+        .steps {
+            grid-template-columns: 1fr;
+        }
+
+
+        .hero h1 {
+            font-size: 34px;
+        }
+
+
+        .project-buttons {
+            flex-direction: column;
+        }
+
+
+        .project-button {
+            width: 100%;
+        }
+
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<!-- =========================
+     HERO
+========================= -->
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <div class="tag">
+            PROJETO ACADÊMICO · ANÁLISE DE DADOS
+        </div>
+
+
+        <h1>
+
+            Dengue no Brasil:
+            <span>uma leitura através dos dados.</span>
+
+        </h1>
+
+
+        <p>
+
+            Uma análise exploratória dos casos de dengue no Brasil
+            entre 2015 e 2024, buscando compreender padrões
+            temporais, regionais e possíveis relações com fatores
+            ambientais.
+
+        </p>
+
+
+        <a
+            href="#projeto"
+            class="hero-button">
+
+            Conhecer o projeto ↓
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- =========================
+     KPIs
+========================= -->
+
+<div class="container">
+
+    <div class="kpis">
+
+
+        <div class="kpi">
+
+            <small>Período analisado</small>
+
+            <strong>2015–2024</strong>
+
+        </div>
+
+
+        <div class="kpi">
+
+            <small>Registros analisados</small>
+
+            <strong>4.440</strong>
+
+        </div>
+
+
+        <div class="kpi">
+
+            <small>Variáveis disponíveis</small>
+
+            <strong>14</strong>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     PROJETO
+========================= -->
+
+<section
+    id="projeto"
+    class="problem">
+
+    <div class="container">
+
+
+        <div class="section-title">
+
+            <small>01 · O projeto</small>
+
+            <h2>Qual problema estamos investigando?</h2>
+
+            <p>
+
+                A dengue representa um importante problema de saúde
+                pública. A análise de dados pode ajudar a compreender
+                como a doença se distribui no território e ao longo
+                do tempo.
+
+            </p>
+
+        </div>
+
+
+        <div class="problem-box">
+
+            <strong>
+
+                Como os casos de dengue evoluíram no Brasil entre
+                2015 e 2024 e quais regiões, estados e períodos
+                apresentaram maior concentração de casos e incidência?
+
+            </strong>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     ANÁLISES
+========================= -->
+
+<section>
+
+    <div class="container">
+
+
+        <div class="section-title">
+
+            <small>02 · Análise</small>
+
+            <h2>O que foi analisado?</h2>
+
+            <p>
+
+                O projeto combina diferentes abordagens para
+                transformar os dados disponíveis em informações
+                mais fáceis de interpretar.
+
+            </p>
+
+        </div>
+
+
+        <div class="analysis-grid">
+
+
+            <div class="analysis-card">
+
+                <div class="icon">📈</div>
+
+                <h3>Evolução temporal</h3>
+
+                <p>
+
+                    Análise dos casos ao longo dos anos e meses,
+                    buscando identificar períodos de maior
+                    concentração e possíveis padrões sazonais.
+
+                </p>
+
+            </div>
+
+
+            <div class="analysis-card">
+
+                <div class="icon">🗺️</div>
+
+                <h3>Distribuição geográfica</h3>
+
+                <p>
+
+                    Comparação entre regiões, estados e municípios
+                    para identificar áreas com maior quantidade
+                    de casos e incidência.
+
+                </p>
+
+            </div>
+
+
+            <div class="analysis-card">
+
+                <div class="icon">🌧️</div>
+
+                <h3>Fatores ambientais</h3>
+
+                <p>
+
+                    Investigação da relação estatística entre
+                    chuva, temperatura e quantidade de casos
+                    registrados.
+
+                </p>
+
+            </div>
+
+
+            <div class="analysis-card">
+
+                <div class="icon">🏥</div>
+
+                <h3>Impactos na saúde</h3>
+
+                <p>
+
+                    Análise conjunta de casos, internações,
+                    óbitos e níveis de alerta para compreender
+                    os impactos observados na base.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     METODOLOGIA
+========================= -->
+
+<section class="methodology">
+
+    <div class="container">
+
+
+        <div class="section-title">
+
+            <small>03 · Metodologia</small>
+
+            <h2>Da base de dados ao dashboard</h2>
+
+            <p>
+
+                O projeto foi desenvolvido seguindo etapas de
+                preparação, análise e visualização dos dados.
+
+            </p>
+
+        </div>
+
+
+        <div class="steps">
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    ETAPA 01
+                </div>
+
+                <h3>Preparação</h3>
+
+                <p>
+
+                    Importação, inspeção, tratamento e organização
+                    da base de dados.
+
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    ETAPA 02
+                </div>
+
+                <h3>Exploração</h3>
+
+                <p>
+
+                    Cálculo de indicadores e investigação dos
+                    principais padrões encontrados.
+
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    ETAPA 03
+                </div>
+
+                <h3>Visualização</h3>
+
+                <p>
+
+                    Desenvolvimento de gráficos e análises
+                    temporais, regionais e estatísticas.
+
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    ETAPA 04
+                </div>
+
+                <h3>Dashboard</h3>
+
+                <p>
+
+                    Transformação dos resultados em uma aplicação
+                    interativa utilizando Streamlit.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     RESULTADOS
+========================= -->
+
+<section>
+
+    <div class="container">
+
+
+        <div class="section-title">
+
+            <small>04 · Resultados</small>
+
+            <h2>O que os dados permitem observar?</h2>
+
+        </div>
+
+
+        <div class="insights">
+
+
+            <div class="insight-text">
+
+                <p>
+
+                    A análise identificou diferenças importantes
+                    na distribuição dos casos entre regiões e
+                    estados brasileiros.
+
+                </p>
+
+
+                <p>
+
+                    Também foi possível observar variações ao longo
+                    dos meses e dos anos, indicando um comportamento
+                    temporal que merece atenção.
+
+                </p>
+
+
+                <p>
+
+                    Na análise estatística, a correlação entre
+                    chuva e casos foi de <strong>0,29</strong>,
+                    enquanto a correlação entre temperatura e casos
+                    foi de <strong>0,17</strong>.
+
+                </p>
+
+
+                <p>
+
+                    Já a relação entre casos de dengue e internações
+                    apresentou uma correlação de <strong>0,97</strong>.
+
+                </p>
+
+            </div>
+
+
+            <div class="highlight">
+
+                <h3>Principais pontos</h3>
+
+
+                <ul>
+
+                    <li>
+                        Distribuição desigual dos casos entre
+                        regiões e estados.
+                    </li>
+
+                    <li>
+                        Existência de períodos de maior
+                        concentração de casos.
+                    </li>
+
+                    <li>
+                        Correlação positiva entre chuva e casos,
+                        porém fraca.
+                    </li>
+
+                    <li>
+                        Correlação muito forte entre casos e
+                        internações.
+                    </li>
+
+                    <li>
+                        Correlação estatística não significa
+                        necessariamente causalidade.
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     TECNOLOGIAS
+========================= -->
+
+<section class="problem">
+
+    <div class="container">
+
+
+        <div class="section-title">
+
+            <small>05 · Tecnologias</small>
+
+            <h2>Ferramentas utilizadas</h2>
+
+        </div>
+
+
+        <div class="tech-list">
+
+            <span class="tech">Python</span>
+
+            <span class="tech">Pandas</span>
+
+            <span class="tech">NumPy</span>
+
+            <span class="tech">Matplotlib</span>
+
+            <span class="tech">Seaborn</span>
+
+            <span class="tech">Streamlit</span>
+
+            <span class="tech">GitHub</span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     MATERIAIS DO PROJETO
+========================= -->
+
+<section class="dashboard">
+
+    <div class="container">
+
+
+        <h2>Explore o projeto</h2>
+
+
+        <p>
+
+            Acesse o dashboard interativo, baixe a base de dados
+            utilizada na análise, consulte o notebook desenvolvido
+            em Python ou veja a documentação completa do projeto.
+
+        </p>
+
+
+        <div class="project-buttons">
+
+
+            <!-- DASHBOARD -->
+
+            <a
+                href="#"
+                class="project-button primary">
+
+                🦟 Acessar Dashboard
+
+            </a>
+
+
+            <!-- BASE DE DADOS -->
+
+            <a
+                href="dados/simulacao_dengue_brasil.csv"
+                download
+                class="project-button">
+
+                📊 Baixar base de dados
+
+            </a>
+
+
+            <!-- README -->
+
+            <a
+                href="README.md"
+                target="_blank"
+                class="project-button">
+
+                📖 Ver README
+
+            </a>
+
+
+            <!-- NOTEBOOK -->
+
+            <a
+                href="notebooks/analise_dengue.ipynb"
+                target="_blank"
+                class="project-button">
+
+                📓 Ver notebook
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+
+        Projeto acadêmico · Análise e Visualização de Dados com Python
+
+    </p>
+
+
+    <p style="margin-top: 8px;">
+
+        Dashboard de Dengue no Brasil · 2015–2024
+
+    </p>
+
+</footer>
+```
+
+</body>
+
+</html>
