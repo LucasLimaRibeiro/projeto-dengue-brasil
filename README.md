@@ -1,6 +1,6 @@
 PROJETO ACADÊMICO
 
-Disciplina: Linguagem de Programação — Análise e Visualização de Dados com Python
+Disciplina: Linguagens de Programação 
 Professor: Alexandre Neves Louzada
 Aluno: Lucas Lima Ribeiro
 
