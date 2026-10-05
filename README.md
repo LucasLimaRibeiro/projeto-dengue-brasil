@@ -117,6 +117,6 @@ projeto-dengue-brasil/
 ├── database/
 │
 ├── notebooks/
-│   └── analise_dengue_brasil.ipynb
+│   └── analise_dengue.ipynb
 │
 └── imagens/
