@@ -1,3 +1,10 @@
+# ============================================================
+# PROJETO ACADÊMICO
+# Disciplina: Linguagem de Programação — Análise e Visualização de Dados com Python
+# Professor: Alexandre Neves Louzada
+# Aluno: Lucas Lima Ribeiro
+# ============================================================
+
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt

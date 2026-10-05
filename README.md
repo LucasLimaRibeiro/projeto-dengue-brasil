@@ -1,3 +1,10 @@
+<!--
+    PROJETO ACADÊMICO
+
+    Disciplina: Linguagem de Programação — Análise e Visualização de Dados com Python
+    Professor: Alexandre Neves Louzada
+    Aluno: Lucas Lima Ribeiro
+-->
 # 🦟 Dashboard de Dengue no Brasil
 
 ## Projeto de Análise e Visualização de Dados com Python
