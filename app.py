@@ -19,7 +19,12 @@ st.set_page_config(
     page_icon="🦟",
     layout="wide"
 )
-
+st.markdown(
+    "**Aluno:** Lucas Lima Ribeiro \n"
+    "**Professor:** Alexandre Louzada \n"
+    "**Materia:** Linguagens de programação \n"
+)
+st.divider()
 
 # ============================================================
 # CARREGAMENTO DOS DADOS
